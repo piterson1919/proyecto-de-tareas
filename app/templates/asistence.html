@@ -1,0 +1,75 @@
+{% extends "nav.html" %}
+
+{% block content %}
+<style>
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .qr-box {
+        text-align: center;
+        background: linear-gradient(to bottom right, #ffffff, #f4f6f9);
+        padding: 50px 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        max-width: 600px;
+        margin: 40px auto;
+        animation: fadeInUp 1.2s ease-out;
+    }
+
+    .qr-box h2 {
+        color: #1e1e2f;
+        font-size: 28px;
+        margin-bottom: 25px;
+        font-weight: bold;
+        animation: fadeInUp 1.5s ease;
+    }
+
+    .qr-box img {
+        border: 5px solid #2f2f45;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .qr-box img:hover {
+        transform: scale(1.05);
+    }
+
+    .url-text {
+        display: block;
+        margin-top: 30px;
+        font-weight: 500;
+        color: #2f2f45;
+        font-size: 16px;
+        text-align: center;
+        word-break: break-all;
+    }
+
+    .admin-link {
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: 500;
+        font-size: 16px;
+    }
+</style>
+
+<div class="admin-link">
+    <a href="https://docs.google.com/forms/d/1Od3oWnBVIOv89dfCCMivBxPlkOHIm0hHIY9FtKxJSLY/edit#question=1633920210&field=2005620554">administrar asistencia</a>
+</div>
+
+<div class="qr-box">
+    <h2>Escanea el QR para registrar asistencia</h2>
+    <img src="{% url 'attendance_qr_image' %}" alt="QR asistencia" width="250">
+    <h2>Ver versión en línea</h2>
+    <div class="url-text">
+        https://docs.google.com/forms/d/e/1FAIpQLSco21m73FzunFwdhCEjHtXWI7JbOWucbJCnP0AG91h-LN0lRw/viewform?usp=header
+    </div>
+</div>
+{% endblock %}

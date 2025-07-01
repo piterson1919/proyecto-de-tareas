@@ -1,0 +1,148 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  body {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ✅ Estilo para los enlaces del navbar */
+  nav a,
+  nav a:visited {
+    color: white !important;
+    text-decoration: none !important;
+  }
+
+  nav a:hover {
+    color: #ffd700 !important;
+  }
+
+  .main-section {
+    padding: 3rem 2rem;
+    max-width: 100%;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: dropFade 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  .section-header h1 {
+    font-size: 2.5rem;
+    color: #1e1e2f;
+    margin-bottom: 10px;
+  }
+
+  .section-header .underline {
+    width: 80px;
+    height: 3px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #1e1e2f, #2f2f45, #ffd700);
+    border-radius: 4px;
+  }
+
+  @keyframes dropFade {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  .task-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0 2rem;
+    box-sizing: border-box;
+  }
+
+  .task-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .task-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background-color: #f8fafd;
+  }
+
+  .task-box h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #1e1e2f;
+  }
+
+  .task-box p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+  }
+
+  a, a:visited, a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .empty-message {
+    text-align: center;
+    width: 100%;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #888;
+  }
+
+  .empty-message i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #ffd700;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 500px) {
+    .section-header h1 {
+      font-size: 2rem;
+    }
+
+    .task-wrapper {
+      padding: 0 1rem;
+    }
+  }
+</style>
+
+<div class="main-section">
+  <div class="section-header">
+    <h1>Mis Tareas</h1>
+    <div class="underline"></div>
+  </div>
+
+  <div class="task-wrapper">
+    {% for task in tasks %}
+      <a href="{% url 'task_detail' task.id %}" class="task-box">
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
+      </a>
+    {% empty %}
+      <div class="empty-message">
+        <i class="far fa-smile-beam"></i>
+        ✨ No hay tareas por ahora. Disfrutá tu tiempo libre ✨
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

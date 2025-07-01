@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .navbar-container {
+            background-color: #1e1e2f;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar-left,
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-item a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-item a:hover {
+            background-color: #2f2f45;
+            color: #ffd700;
+        }
+
+        .navbar-clock,
+        .navbar-user {
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .page-content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .navbar-left,
+            .navbar-right {
+                justify-content: center;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .navbar-menu {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .navbar-item a {
+                background-color: #2b2b3d;
+                text-align: center;
+                display: block;
+            }
+
+            .navbar-item a:hover {
+                background-color: #3c3c54;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar-container">
+        <nav class="navbar">
+            <div class="navbar-left">
+                <ul class="navbar-menu">
+                    <li class="navbar-item"><a href="{% url 'logout' %}">cerrar sesión</a></li>
+                    <li class="navbar-item"><a href="{% url 'tasks' %}">tareas</a></li>
+                    <li class="navbar-item"><a href="{% url 'create_task' %}">Crear tareas</a></li>
+                    
+                    
+                    <li class="navbar-item"><a href="{% url 'ver_calendario' %}">calendario</a></li>
+                    <li class="navbar-item"><a href="{% url 'crear_evento' %}">crear evento</a></li>
+                    <li class="navbar-item"><a href="{% url 'asistensia' %}">asistencia</a></li>
+                </ul>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-user">Usuario: {{ user.username }}</div>
+                <div class="navbar-clock" id="clock">00:00:00</div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="page-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script>
+        function actualizarHora() {
+            const ahora = new Date();
+            const horas = String(ahora.getHours()).padStart(2, '0');
+            const minutos = String(ahora.getMinutes()).padStart(2, '0');
+            const segundos = String(ahora.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${horas}:${minutos}:${segundos}`;
+        }
+
+        setInterval(actualizarHora, 1000);
+        actualizarHora();
+    </script>
+
+</body>
+</html>
