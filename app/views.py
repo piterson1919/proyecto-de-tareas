@@ -101,7 +101,7 @@ def singout(request):
 #imagen de el qr
 
 def attendance_qr_image(request):
-    form_url = "https://docs.google.com/forms/d/e/1FAIpQLSco21m73FzunFwdhCEjHtXWI7JbOWucbJCnP0AG91h-LN0lRw/viewform?usp=header"
+    form_url = "https://docs.google.com/forms/d/e/1FAIpQLSc7LfVOlXw300xiwGvAy8d7--B1Nh4MuOUZvqCPuXqqWQKF2w/viewform?usp=header"
     qr_img = qrcode.make(form_url)
     
     buffer = io.BytesIO()
