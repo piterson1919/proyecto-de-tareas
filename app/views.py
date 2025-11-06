@@ -42,13 +42,12 @@ def register(request):
         return render (request,'register.html')
     else:
         if request.POST['password1'] == request.POST['password2']:
-            try:
+            
                 user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
                 return redirect('tasks')
-            except:
-                return render(request, 'register.html', {'error': 'nombre de usuario ya existente'})
+            
         else:
             return render(request, 'register.html', {'error': 'las contraseñas no coinciden'})
 
